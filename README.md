@@ -63,12 +63,19 @@ pip install transformers accelerate torch pillow
 ```
 TarlAI/
 ├── README.md
-├── tarlai_notebook.py      # Main notebook code
-├── tarlai_tools.py         # Weather API and treatment database
-├── report/
-│   └── TarlAI_Technical_Report.docx
+├── LICENSE
+├── notebooks/
+│   └── TarlAI_Demo.ipynb          # Main Kaggle notebook (run this)
+├── src/
+│   ├── tarlai_tools.py            # Weather API & treatment database
+│   └── tarlai_pipeline.py         # Core analysis pipeline
+├── docs/
+│   ├── TarlAI_Technical_Report.docx
+│   └── architecture.md            # System architecture details
+├── data/
+│   └── sample_images/             # Test plant disease images
 └── demo/
-    └── sample_output.md    # Sample analysis output
+    └── sample_output.md           # Example TarlAI output
 ```
 
 ## Sample Output
