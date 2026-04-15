@@ -4,32 +4,78 @@ Used by Gemma 4 via native function calling
 """
 
 import json
+import os
+import requests
+from dotenv import load_dotenv
+
+# .env dosyasını yükle
+load_dotenv()
+
+OPENWEATHER_API_KEY = os.getenv("OPENWEATHER_API_KEY")
+OPENWEATHER_BASE_URL = "https://api.openweathermap.org/data/2.5/weather"
+
+# OpenWeatherMap condition code -> basitleştirilmiş durum eşlemesi
+_CONDITION_MAP = {
+    "Clear": "Sunny",
+    "Clouds": "Cloudy",
+    "Rain": "Rainy",
+    "Drizzle": "Rainy",
+    "Thunderstorm": "Stormy",
+    "Snow": "Snowy",
+    "Mist": "Foggy",
+    "Fog": "Foggy",
+    "Haze": "Hazy",
+}
 
 
 def get_weather(location: str) -> dict:
     """
-    Get current weather information for a given location.
+    Get current weather information for a given location via OpenWeatherMap API.
+
     Args:
         location: City name, e.g. 'Antalya' or 'Istanbul'
     Returns:
         Weather data including temperature, humidity, rain probability
     """
-    # TODO: Replace with OpenWeatherMap API in production
-    db = {
-        "antalya": {"temp": 26, "humidity": 72, "rain_pct": 15, "wind_kmh": 12, "condition": "Sunny"},
-        "istanbul": {"temp": 18, "humidity": 65, "rain_pct": 40, "wind_kmh": 22, "condition": "Cloudy"},
-        "izmir": {"temp": 24, "humidity": 58, "rain_pct": 10, "wind_kmh": 15, "condition": "Sunny"},
-        "mugla": {"temp": 25, "humidity": 60, "rain_pct": 20, "wind_kmh": 14, "condition": "Partly Cloudy"},
-        "burdur": {"temp": 22, "humidity": 50, "rain_pct": 5, "wind_kmh": 8, "condition": "Sunny"},
-        "konya": {"temp": 20, "humidity": 45, "rain_pct": 10, "wind_kmh": 18, "condition": "Sunny"},
-        "mersin": {"temp": 27, "humidity": 75, "rain_pct": 20, "wind_kmh": 10, "condition": "Partly Cloudy"},
-        "adana": {"temp": 28, "humidity": 70, "rain_pct": 15, "wind_kmh": 8, "condition": "Sunny"},
-    }
-    key = location.lower().strip()
-    for city, data in db.items():
-        if city in key:
-            return {"location": location, **data}
-    return {"location": location, "temp": 20, "humidity": 60, "rain_pct": 25, "wind_kmh": 10, "condition": "Unknown"}
+    if not OPENWEATHER_API_KEY or OPENWEATHER_API_KEY == "YOUR_API_KEY_HERE":
+        return {"location": location, "error": "API key tanımlanmamış. .env dosyasını kontrol edin."}
+
+    try:
+        params = {
+            "q": f"{location},TR",
+            "appid": OPENWEATHER_API_KEY,
+            "units": "metric",       # Celsius
+            "lang": "tr",            # Türkçe açıklamalar
+        }
+        response = requests.get(OPENWEATHER_BASE_URL, params=params, timeout=5)
+        response.raise_for_status()
+        data = response.json()
+
+        # Ana hava durumu bilgisini çıkar
+        main = data.get("main", {})
+        wind = data.get("wind", {})
+        weather_info = data.get("weather", [{}])[0]
+        clouds = data.get("clouds", {})
+
+        # Yağış olasılığı: bulutluluk yüzdesini kullan
+        rain_pct = clouds.get("all", 0)
+
+        # Ana durum kategorisini basitleştir
+        main_condition = weather_info.get("main", "Unknown")
+        condition = _CONDITION_MAP.get(main_condition, main_condition)
+
+        return {
+            "location": location,
+            "temp": round(main.get("temp", 0)),
+            "feels_like": round(main.get("feels_like", 0)),
+            "humidity": main.get("humidity", 0),
+            "rain_pct": rain_pct,
+            "wind_kmh": round(wind.get("speed", 0) * 3.6),  # m/s -> km/h
+            "condition": condition,
+            "description": weather_info.get("description", ""),
+        }
+    except requests.RequestException as e:
+        return {"location": location, "error": f"API hatası: {e}"}
 
 
 def get_treatment(disease_name: str) -> dict:
