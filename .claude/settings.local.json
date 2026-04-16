@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python src/tarlai_tools.py)",
+      "Bash(python -c ' *)",
+      "Bash(python notebooks/_update_prompts.py)"
+    ]
+  }
+}
