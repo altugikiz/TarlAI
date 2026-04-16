@@ -4,6 +4,12 @@ Used by Gemma 4 via native function calling
 """
 
 import json
+import sys
+import os
+
+# diseases.py ile aynı klasörde olduğu için path ekle
+sys.path.insert(0, os.path.dirname(__file__))
+from diseases import DISEASE_DB
 
 
 def get_weather(location: str) -> dict:
@@ -40,80 +46,8 @@ def get_treatment(disease_name: str) -> dict:
     Returns:
         Treatment details including chemical and organic options
     """
-    db = {
-        "leaf_spot": {
-            "name": "Leaf Spot (Yaprak Lekesi)",
-            "chemical": "Copper-based fungicide, Mancozeb",
-            "organic": "Bordeaux mixture, Neem oil",
-            "interval": "7-14 days",
-            "notes": "Avoid overhead watering"
-        },
-        "early_blight": {
-            "name": "Early Blight (Erken Yaniklik)",
-            "chemical": "Mancozeb, Chlorothalonil",
-            "organic": "Neem oil, copper sulfate solution",
-            "interval": "7-10 days",
-            "notes": "Apply early morning or late evening"
-        },
-        "late_blight": {
-            "name": "Late Blight (Gec Yaniklik)",
-            "chemical": "Metalaxyl, Bordeaux mixture",
-            "organic": "Bordeaux mixture (copper based)",
-            "interval": "5-7 days",
-            "notes": "Remove infected leaves immediately"
-        },
-        "powdery_mildew": {
-            "name": "Powdery Mildew (Kulleme)",
-            "chemical": "Sulfur-based fungicide",
-            "organic": "Milk-water mix (40% milk)",
-            "interval": "7 days",
-            "notes": "Improve air circulation between plants"
-        },
-        "downy_mildew": {
-            "name": "Downy Mildew (Mildiyou)",
-            "chemical": "Metalaxyl, Fosetyl-Al",
-            "organic": "Copper hydroxide",
-            "interval": "7-10 days",
-            "notes": "Ensure good drainage"
-        },
-        "rust": {
-            "name": "Rust (Pas Hastaligi)",
-            "chemical": "Triadimefon, Propiconazole",
-            "organic": "Sulfur dust, Neem oil",
-            "interval": "7-14 days",
-            "notes": "Remove infected plant debris"
-        },
-        "anthracnose": {
-            "name": "Anthracnose (Antrakoz)",
-            "chemical": "Chlorothalonil, Copper fungicide",
-            "organic": "Bordeaux mixture",
-            "interval": "7-10 days",
-            "notes": "Avoid working with wet plants"
-        },
-        "bacterial_spot": {
-            "name": "Bacterial Spot (Bakteriyel Leke)",
-            "chemical": "Copper-based bactericide",
-            "organic": "Copper hydroxide spray",
-            "interval": "5-7 days",
-            "notes": "No cure once established, focus on prevention"
-        },
-        "mosaic_virus": {
-            "name": "Mosaic Virus (Mozaik Virusu)",
-            "chemical": "No chemical treatment available",
-            "organic": "Remove and destroy infected plants",
-            "interval": "N/A",
-            "notes": "Control aphid vectors, use resistant varieties"
-        },
-        "root_rot": {
-            "name": "Root Rot (Kok Curumesi)",
-            "chemical": "Metalaxyl soil drench",
-            "organic": "Improve drainage, reduce watering",
-            "interval": "14-21 days",
-            "notes": "Avoid waterlogged conditions"
-        },
-    }
     key = disease_name.lower().replace(" ", "_").strip()
-    for disease, data in db.items():
+    for disease, data in DISEASE_DB.items():
         if disease in key or key in disease:
             return data
     return {
@@ -126,6 +60,18 @@ def get_treatment(disease_name: str) -> dict:
 
 
 if __name__ == "__main__":
-    # Test
+    # Test - mevcut
     print("Weather test:", json.dumps(get_weather("Antalya"), indent=2))
-    print("Treatment test:", json.dumps(get_treatment("leaf_spot"), indent=2))
+    print("Treatment test (leaf_spot):", json.dumps(get_treatment("leaf_spot"), indent=2))
+
+    # Test - yeni hastalıklar
+    test_diseases = [
+        "citrus_greening", "fusarium_wilt", "grape_black_rot",
+        "olive_peacock_spot", "blossom_end_rot", "gray_mold",
+        "unknown_disease"
+    ]
+    print(f"\n--- Toplam hastalık sayısı: {len(DISEASE_DB)} ---")
+    for d in test_diseases:
+        result = get_treatment(d)
+        status = "BULUNDU" if result.get("notes") != "Disease not found in database" else "BULUNAMADI"
+        print(f"[{status}] {d}: {result.get('name', 'N/A')}")
