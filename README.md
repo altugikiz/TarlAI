@@ -1,5 +1,8 @@
 # TarlAI - AI-Powered Agricultural Assistant
 
+## 🌐 Live Demo
+[**Try TarlAI Now**](https://altugikiz.github.io/TarlAI/demo/) - Interactive web demo with real Gemma 4 outputs
+
 > Multimodal plant disease diagnosis with weather-aware treatment recommendations using Google's Gemma 4
 
 ## Overview
