@@ -27,3 +27,4 @@ Thumbs.db
 
 # Runtime data (polygon cache vb.)
 data/
+src/__pycache__/diseases.cpython-312.pyc
