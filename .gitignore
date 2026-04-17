@@ -25,7 +25,5 @@ env/
 .DS_Store
 Thumbs.db
 
-# Runtime data (polygon cache vb.)
-data/
 __pycache__/
 *.pyc
