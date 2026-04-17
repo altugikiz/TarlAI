@@ -504,3 +504,29 @@ DISEASE_DB = {
     },
 
 }
+
+
+def get_treatment(disease_name: str) -> dict:
+    """Look up treatment information for a plant disease from DISEASE_DB.
+
+    Performs fuzzy matching: the query and database keys are compared
+    with substring matching in both directions.
+
+    Args:
+        disease_name: Disease identifier, e.g. 'early_blight', 'powdery_mildew'.
+
+    Returns:
+        Dict with disease info (name, chemical, organic, interval, notes, etc.).
+        Returns a fallback entry if the disease is not found in the database.
+    """
+    normalized_key = disease_name.lower().replace(" ", "_").strip()
+    for disease_id, info in DISEASE_DB.items():
+        if disease_id in normalized_key or normalized_key in disease_id:
+            return info
+    return {
+        "name": disease_name,
+        "chemical": "Consult local agricultural office",
+        "organic": "N/A",
+        "interval": "N/A",
+        "notes": "Disease not found in database",
+    }
