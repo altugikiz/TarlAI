@@ -70,8 +70,12 @@ TarlAI/
 ├── notebooks/
 │   └── TarlAI_Demo.ipynb          # Main Kaggle notebook (run this)
 ├── src/
-│   ├── tarlai_tools.py            # Weather API & treatment database
-│   └── tarlai_pipeline.py         # Core analysis pipeline
+│   ├── tarlai_tools.py            # Public API facade (re-exports all tools)
+│   ├── tarlai_pipeline.py         # Core analysis pipeline (3-stage)
+│   ├── weather_api.py             # OpenWeatherMap + AgroMonitoring weather
+│   ├── agro_api.py                # Soil, UV, satellite & NDVI data
+│   ├── diseases.py                # Disease database (29 diseases) + get_treatment()
+│   └── polygon_cache.py           # AgroMonitoring polygon lifecycle & cache
 ├── docs/
 │   ├── TarlAI_Technical_Report.docx
 │   └── architecture.md            # System architecture details
@@ -110,10 +114,9 @@ Merhaba ciftci kardesim, ben TarlAI. Tarim danismanlik hizmetinizdeyim.
 
 ## Future Plans
 
-- Real-time OpenWeatherMap API integration
-- Expanded disease database (50+ Turkish crop diseases)
 - Fine-tuning with Unsloth on Turkish agricultural data
 - Android app via LiteRT for offline operation
+- Expanded disease database (50+ Turkish crop diseases)
 
 ## License
 
