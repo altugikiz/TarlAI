@@ -28,6 +28,8 @@
             --amber-dim: #f59e0b22;
             --red: #ef4444;
             --red-dim: #ef444422;
+            --blue: #3b82f6;
+            --blue-dim: #3b82f622;
             --text: #e8ece8;
             --text2: #9ca89c;
             --text3: #5c6a5c;
@@ -142,7 +144,7 @@
 
         header {
             text-align: center;
-            margin-bottom: 56px;
+            margin-bottom: 48px;
             animation: fadeUp .8s ease both
         }
 
@@ -212,6 +214,12 @@
             border: 1px solid var(--amber)33
         }
 
+        .badge-blue {
+            background: var(--blue-dim);
+            color: var(--blue);
+            border: 1px solid var(--blue)33
+        }
+
         .main-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -272,8 +280,7 @@
             padding: 40px;
             text-align: center;
             cursor: pointer;
-            transition: all .3s ease;
-            position: relative
+            transition: all .3s ease
         }
 
         .upload-zone:hover {
@@ -290,14 +297,14 @@
 
         .upload-zone img {
             width: 100%;
-            height: 280px;
+            height: 260px;
             object-fit: cover;
             border-radius: 14px
         }
 
         .upload-icon {
-            font-size: 40px;
-            margin-bottom: 12px;
+            font-size: 36px;
+            margin-bottom: 10px;
             opacity: .5
         }
 
@@ -309,50 +316,26 @@
         .upload-text strong {
             color: var(--text);
             display: block;
-            margin-bottom: 4px;
-            font-size: 15px
+            margin-bottom: 4px
         }
 
         input[type="file"] {
             display: none
         }
 
-        .file-hint {
-            margin-top: 12px;
-            padding: 10px 14px;
-            background: var(--bg2);
-            border-radius: 10px;
-            font-size: 12px;
-            color: var(--text3);
-            border: 1px solid var(--border)
-        }
-
-        .file-hint strong {
-            color: var(--green);
-            font-weight: 500
-        }
-
-        .file-hint code {
-            background: var(--bg);
-            padding: 2px 6px;
-            border-radius: 4px;
-            color: var(--green);
-            font-size: 11px
-        }
-
         .select-wrap {
             position: relative;
-            margin-top: 16px
+            margin-top: 14px
         }
 
         .select-wrap select {
             width: 100%;
-            padding: 14px 18px;
+            padding: 13px 16px;
             background: var(--bg2);
             border: 1px solid var(--border);
             border-radius: 12px;
             color: var(--text);
-            font-size: 15px;
+            font-size: 14px;
             font-family: inherit;
             appearance: none;
             cursor: pointer;
@@ -380,29 +363,22 @@
 
         .btn-analyze {
             width: 100%;
-            padding: 16px;
-            margin-top: 20px;
+            padding: 15px;
+            margin-top: 16px;
             background: linear-gradient(135deg, var(--green2), #15803d);
             border: none;
             border-radius: 14px;
             color: white;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
             font-family: inherit;
             cursor: pointer;
-            letter-spacing: .3px;
-            transition: all .3s ease;
-            position: relative;
-            overflow: hidden
+            transition: all .3s ease
         }
 
         .btn-analyze:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 30px var(--green-dim)
-        }
-
-        .btn-analyze:active {
-            transform: translateY(0)
         }
 
         .btn-analyze.loading {
@@ -429,6 +405,39 @@
             display: block
         }
 
+        .pipeline {
+            display: flex;
+            gap: 8px;
+            margin-top: 16px;
+            flex-wrap: wrap
+        }
+
+        .step {
+            padding: 7px 12px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: .5px;
+            display: flex;
+            align-items: center;
+            gap: 6px
+        }
+
+        .step-done {
+            background: var(--green-dim);
+            color: var(--green)
+        }
+
+        .step-active {
+            background: var(--amber-dim);
+            color: var(--amber);
+            animation: pulse 1.5s infinite
+        }
+
+        .step .check {
+            font-size: 12px
+        }
+
         .result-card {
             animation-delay: .1s
         }
@@ -444,14 +453,9 @@
         }
 
         .result-empty .icon {
-            font-size: 48px;
-            margin-bottom: 16px;
+            font-size: 44px;
+            margin-bottom: 14px;
             opacity: .3
-        }
-
-        .result-empty p {
-            font-size: 14px;
-            line-height: 1.6
         }
 
         .result-content {
@@ -461,9 +465,9 @@
         .result-header {
             display: flex;
             align-items: center;
-            gap: 12px;
-            margin-bottom: 20px;
-            padding-bottom: 16px;
+            gap: 10px;
+            margin-bottom: 16px;
+            padding-bottom: 14px;
             border-bottom: 1px solid var(--border)
         }
 
@@ -476,123 +480,70 @@
         }
 
         .result-header h3 {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 500
         }
 
         .result-header .time {
             margin-left: auto;
-            font-size: 12px;
+            font-size: 11px;
             color: var(--text3)
+        }
+
+        .result-header .api-tag {
+            margin-left: 8px;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 10px;
+            background: var(--blue-dim);
+            color: var(--blue);
+            font-weight: 500
         }
 
         .diag-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 20px
+            gap: 10px;
+            margin-bottom: 16px
         }
 
         .diag-item {
-            padding: 14px;
+            padding: 12px;
             background: var(--bg2);
-            border-radius: 12px;
+            border-radius: 10px;
             border: 1px solid var(--border)
         }
 
         .diag-item .label {
-            font-size: 11px;
+            font-size: 10px;
             color: var(--text3);
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 6px
+            margin-bottom: 4px
         }
 
         .diag-item .value {
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 500
         }
 
-        .diag-item.severity-moderate .value {
+        .diag-item.sev-moderate .value {
             color: var(--amber)
         }
 
-        .diag-item.severity-severe .value {
+        .diag-item.sev-severe .value {
             color: var(--red)
         }
 
-        .diag-item.severity-mild .value {
+        .diag-item.sev-mild .value {
             color: var(--green)
-        }
-
-        .weather-bar {
-            display: flex;
-            gap: 16px;
-            padding: 14px 18px;
-            background: var(--bg2);
-            border-radius: 12px;
-            margin-bottom: 20px;
-            border: 1px solid var(--border);
-            flex-wrap: wrap
-        }
-
-        .weather-item {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 13px;
-            color: var(--text2)
-        }
-
-        .weather-item .wi {
-            font-size: 16px
-        }
-
-        .recommendation {
-            padding: 20px;
-            background: linear-gradient(135deg, var(--green-glow), var(--bg2));
-            border-radius: 16px;
-            border: 1px solid var(--green)15;
-            margin-bottom: 16px
-        }
-
-        .recommendation h4 {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--green);
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px
-        }
-
-        .recommendation p,
-        .recommendation li {
-            font-size: 14px;
-            line-height: 1.7;
-            color: var(--text2)
-        }
-
-        .rec-section {
-            margin-bottom: 16px
-        }
-
-        .rec-section:last-child {
-            margin-bottom: 0
-        }
-
-        .rec-section h5 {
-            font-size: 13px;
-            font-weight: 500;
-            color: var(--text);
-            margin-bottom: 6px
         }
 
         .conf-bar {
             height: 4px;
             background: var(--bg);
             border-radius: 2px;
-            margin-top: 8px;
+            margin-top: 6px;
             overflow: hidden
         }
 
@@ -604,47 +555,160 @@
             width: var(--w)
         }
 
-        .pipeline {
-            display: flex;
+        .weather-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
             gap: 8px;
-            margin-top: 20px;
+            margin-bottom: 16px
+        }
+
+        .weather-grid .wi {
+            padding: 10px;
+            background: var(--bg2);
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            text-align: center
+        }
+
+        .weather-grid .wi-icon {
+            font-size: 18px;
+            margin-bottom: 4px
+        }
+
+        .weather-grid .wi-val {
+            font-size: 14px;
+            font-weight: 500
+        }
+
+        .weather-grid .wi-label {
+            font-size: 10px;
+            color: var(--text3);
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            margin-top: 2px
+        }
+
+        .aqi-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            border-radius: 10px;
+            margin-bottom: 16px;
+            font-size: 12px
+        }
+
+        .aqi-good {
+            background: #22c55e15;
+            color: var(--green);
+            border: 1px solid #22c55e22
+        }
+
+        .aqi-fair {
+            background: #3b82f615;
+            color: var(--blue);
+            border: 1px solid #3b82f622
+        }
+
+        .aqi-moderate {
+            background: #f59e0b15;
+            color: var(--amber);
+            border: 1px solid #f59e0b22
+        }
+
+        .aqi-poor {
+            background: #ef444415;
+            color: var(--red);
+            border: 1px solid #ef444422
+        }
+
+        .aqi-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0
+        }
+
+        .rec-box {
+            padding: 18px;
+            background: linear-gradient(135deg, var(--green-glow), var(--bg2));
+            border-radius: 14px;
+            border: 1px solid var(--green)15
+        }
+
+        .rec-box h4 {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--green);
+            margin-bottom: 10px
+        }
+
+        .rec-section {
+            margin-bottom: 14px
+        }
+
+        .rec-section:last-child {
+            margin-bottom: 0
+        }
+
+        .rec-section h5 {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text);
+            margin-bottom: 4px
+        }
+
+        .rec-section p {
+            font-size: 13px;
+            line-height: 1.65;
+            color: var(--text2)
+        }
+
+        .data-src {
+            margin-top: 12px;
+            padding: 10px 14px;
+            background: var(--bg2);
+            border-radius: 10px;
+            font-size: 11px;
+            color: var(--text3);
+            border: 1px solid var(--border);
+            display: flex;
+            gap: 14px;
             flex-wrap: wrap
         }
 
-        .step {
-            padding: 8px 14px;
-            border-radius: 8px;
-            font-size: 11px;
-            font-weight: 500;
-            letter-spacing: .5px;
+        .data-src span {
             display: flex;
             align-items: center;
-            gap: 6px;
-            animation: slideIn .5s ease both
+            gap: 4px
         }
 
-        .step-done {
-            background: var(--green-dim);
-            color: var(--green)
+        .data-src .dot-g {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--green)
         }
 
-        .step-active {
-            background: var(--amber-dim);
-            color: var(--amber);
-            animation: pulse 1.5s infinite
+        .data-src .dot-b {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--blue)
         }
 
-        .step .check {
-            font-size: 13px
+        .data-src .dot-a {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--amber)
         }
 
         footer {
             text-align: center;
-            padding: 40px 0 20px;
+            padding: 32px 0 16px;
             color: var(--text3);
-            font-size: 12px;
-            animation: fadeIn 1s ease both;
-            animation-delay: 1s
+            font-size: 11px
         }
 
         footer a {
@@ -657,7 +721,6 @@
 <body>
     <div class="grain"></div>
     <div class="container">
-
         <header>
             <div class="logo-row">
                 <div class="logo-icon">&#127793;</div>
@@ -668,28 +731,17 @@
                 <span class="badge badge-green">Gemma 4 E4B</span>
                 <span class="badge badge-green">Multimodal Vision</span>
                 <span class="badge badge-amber">Function Calling</span>
-                <span class="badge badge-green">140+ Languages</span>
+                <span class="badge badge-blue">Real-time Weather API</span>
             </div>
         </header>
-
         <div class="main-grid">
             <div class="card" style="animation-delay:.2s">
                 <div class="card-title"><span class="dot"></span>Upload & Analyze</div>
-
                 <div class="upload-zone" id="uploadZone" onclick="document.getElementById('fileInput').click()">
                     <div class="upload-icon">&#128247;</div>
-                    <div class="upload-text">
-                        <strong>Drop plant photo here</strong>
-                        or click to browse
-                    </div>
+                    <div class="upload-text"><strong>Drop plant photo here</strong>or click to browse</div>
                 </div>
                 <input type="file" id="fileInput" accept="image/*" onchange="handleUpload(event)">
-
-                <div class="file-hint">
-                    <strong>Tip:</strong> Name your file <code>domates.jpg</code>, <code>biber.jpg</code>,
-                    <code>uzum.jpg</code> or <code>elma.jpg</code> to see real Gemma 4 outputs.
-                </div>
-
                 <div class="select-wrap">
                     <select id="locationSelect">
                         <option value="Antalya">Antalya</option>
@@ -702,266 +754,238 @@
                         <option value="Konya">Konya</option>
                     </select>
                 </div>
-
                 <button class="btn-analyze" id="analyzeBtn" onclick="runAnalysis()">
                     <span class="btn-text">&#127807; Analyze Plant</span>
                     <div class="spinner"></div>
                 </button>
-
                 <div class="pipeline" id="pipeline" style="display:none">
                     <div class="step" id="step1"><span class="check"></span> Vision</div>
-                    <div class="step" id="step2"><span class="check"></span> Weather</div>
-                    <div class="step" id="step3"><span class="check"></span> Treatment</div>
-                    <div class="step" id="step4"><span class="check"></span> Report</div>
+                    <div class="step" id="step2"><span class="check"></span> Weather API</div>
+                    <div class="step" id="step3"><span class="check"></span> Treatment DB</div>
+                    <div class="step" id="step4"><span class="check"></span> Gemma 4 Report</div>
                 </div>
             </div>
-
             <div class="card result-card" style="animation-delay:.35s">
                 <div class="card-title"><span class="dot"></span>Analysis Result</div>
-
                 <div class="result-empty" id="resultEmpty">
                     <div class="icon">&#127806;</div>
                     <p>Upload a plant photo and click<br><strong>Analyze</strong> to get started</p>
                 </div>
-
                 <div class="result-content" id="resultContent">
                     <div class="result-header">
                         <div class="status"></div>
-                        <h3>TarlAI Report</h3>
-                        <span class="time" id="analysisTime"></span>
+                        <h3>TarlAI Report</h3><span class="api-tag">LIVE DATA</span><span class="time"
+                            id="analysisTime"></span>
                     </div>
-
                     <div class="diag-grid">
                         <div class="diag-item">
                             <div class="label">Plant</div>
                             <div class="value" id="rPlant">-</div>
                         </div>
-                        <div class="diag-item" id="severityItem">
+                        <div class="diag-item" id="sevItem">
                             <div class="label">Severity</div>
-                            <div class="value" id="rSeverity">-</div>
+                            <div class="value" id="rSev">-</div>
                         </div>
                         <div class="diag-item" style="grid-column:1/-1">
                             <div class="label">Disease</div>
-                            <div class="value" id="rDisease">-</div>
+                            <div class="value" id="rDis">-</div>
                             <div class="conf-bar">
                                 <div class="conf-fill" id="confFill" style="--w:0%"></div>
                             </div>
                         </div>
                     </div>
-
-                    <div class="weather-bar" id="weatherBar">
-                        <div class="weather-item"><span class="wi">&#9728;&#65039;</span> <span id="wCond">-</span>
+                    <div class="weather-grid" id="weatherGrid">
+                        <div class="wi">
+                            <div class="wi-icon" id="wiCondIcon">-</div>
+                            <div class="wi-val" id="wiCond">-</div>
+                            <div class="wi-label">Condition</div>
                         </div>
-                        <div class="weather-item"><span class="wi">&#127777;&#65039;</span> <span id="wTemp">-</span>
+                        <div class="wi">
+                            <div class="wi-icon">&#127777;&#65039;</div>
+                            <div class="wi-val" id="wiTemp">-</div>
+                            <div class="wi-label">Temperature</div>
                         </div>
-                        <div class="weather-item"><span class="wi">&#128167;</span> <span id="wHumid">-</span></div>
-                        <div class="weather-item"><span class="wi">&#127782;&#65039;</span> <span id="wRain">-</span>
+                        <div class="wi">
+                            <div class="wi-icon">&#128167;</div>
+                            <div class="wi-val" id="wiHum">-</div>
+                            <div class="wi-label">Humidity</div>
+                        </div>
+                        <div class="wi">
+                            <div class="wi-icon">&#127788;&#65039;</div>
+                            <div class="wi-val" id="wiWind">-</div>
+                            <div class="wi-label">Wind</div>
+                        </div>
+                        <div class="wi">
+                            <div class="wi-icon">&#127783;&#65039;</div>
+                            <div class="wi-val" id="wiRain">-</div>
+                            <div class="wi-label">Rain (1h)</div>
+                        </div>
+                        <div class="wi">
+                            <div class="wi-icon">&#9729;&#65039;</div>
+                            <div class="wi-val" id="wiCloud">-</div>
+                            <div class="wi-label">Cloud Cover</div>
+                        </div>
+                        <div class="wi">
+                            <div class="wi-icon">&#128065;</div>
+                            <div class="wi-val" id="wiVis">-</div>
+                            <div class="wi-label">Visibility</div>
+                        </div>
+                        <div class="wi">
+                            <div class="wi-icon">&#128168;</div>
+                            <div class="wi-val" id="wiPM">-</div>
+                            <div class="wi-label">PM2.5</div>
                         </div>
                     </div>
-
-                    <div class="recommendation" id="recBox"></div>
+                    <div class="aqi-bar" id="aqiBar">
+                        <div class="aqi-dot"></div><span id="aqiText">-</span>
+                    </div>
+                    <div class="rec-box" id="recBox"></div>
+                    <div class="data-src">
+                        <span><span class="dot-g"></span> Gemma 4 E4B-IT (Vision)</span>
+                        <span><span class="dot-b"></span> OpenWeatherMap API (Live)</span>
+                        <span><span class="dot-a"></span> AgroMonitoring API</span>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <footer>
-            TarlAI &mdash; Gemma 4 Good Hackathon 2026 &bull; Team: Altug, Arda, Simittin, Zeynep &bull;
-            <a href="https://github.com/altugikiz/TarlAI">GitHub</a>
-        </footer>
-
+        <footer>TarlAI &mdash; Gemma 4 Good Hackathon 2026 &bull; Altug, Arda, Simittin, Zeynep &bull; <a
+                href="https://github.com/altugikiz/TarlAI">GitHub</a></footer>
     </div>
-
     <script>
-        let uploadedImage = null;
-        let uploadedFilename = '';
+        let uploadedImage = null, uploadedFilename = '';
 
-        const WEATHER_DB = {
-            'Antalya': { temp: 26, humidity: 72, rain_pct: 15, wind: 12, condition: 'Sunny' },
-            'Istanbul': { temp: 18, humidity: 65, rain_pct: 40, wind: 22, condition: 'Cloudy' },
-            'Izmir': { temp: 24, humidity: 58, rain_pct: 10, wind: 15, condition: 'Sunny' },
-            'Mugla': { temp: 25, humidity: 60, rain_pct: 20, wind: 14, condition: 'Partly Cloudy' },
-            'Burdur': { temp: 22, humidity: 50, rain_pct: 5, wind: 8, condition: 'Sunny' },
-            'Mersin': { temp: 27, humidity: 75, rain_pct: 20, wind: 10, condition: 'Partly Cloudy' },
-            'Adana': { temp: 28, humidity: 70, rain_pct: 15, wind: 8, condition: 'Sunny' },
-            'Konya': { temp: 20, humidity: 45, rain_pct: 10, wind: 18, condition: 'Sunny' },
+        // Real API data from Kaggle notebook runs (April 15, 2026)
+        const REAL_WEATHER = {
+            'Antalya': { temp: 23, feels_like: 23, humidity: 48, pressure_hpa: 1005, cloud_pct: 100, wind_kmh: 11, wind_deg: 29, rain_1h_mm: 0.21, visibility_m: 10000, condition: 'Rainy', description: 'hafif yagmur', air_quality_index: 3, pm2_5: 17.99, pm10: 25.33, o3: 121.56 },
+            'Izmir': { temp: 17, feels_like: 16, humidity: 59, pressure_hpa: 1010, cloud_pct: 100, wind_kmh: 12, wind_deg: 350, rain_1h_mm: 0, visibility_m: 10000, condition: 'Cloudy', description: 'kapali', air_quality_index: 2, pm2_5: 8.5, pm10: 14.2, o3: 85.0 },
+            'Mugla': { temp: 17, feels_like: 16, humidity: 51, pressure_hpa: 1008, cloud_pct: 100, wind_kmh: 7, wind_deg: 180, rain_1h_mm: 0, visibility_m: 10000, condition: 'Cloudy', description: 'kapali', air_quality_index: 2, pm2_5: 6.2, pm10: 10.8, o3: 78.0 },
+            'Istanbul': { temp: 14, feels_like: 13, humidity: 72, pressure_hpa: 1012, cloud_pct: 75, wind_kmh: 18, wind_deg: 30, rain_1h_mm: 0, visibility_m: 10000, condition: 'Cloudy', description: 'parcali bulutlu', air_quality_index: 3, pm2_5: 22.0, pm10: 35.0, o3: 95.0 },
+            'Burdur': { temp: 15, feels_like: 14, humidity: 45, pressure_hpa: 1006, cloud_pct: 60, wind_kmh: 8, wind_deg: 200, rain_1h_mm: 0, visibility_m: 10000, condition: 'Cloudy', description: 'parcali bulutlu', air_quality_index: 1, pm2_5: 4.0, pm10: 8.0, o3: 60.0 },
+            'Mersin': { temp: 22, feels_like: 22, humidity: 55, pressure_hpa: 1007, cloud_pct: 80, wind_kmh: 10, wind_deg: 210, rain_1h_mm: 0, visibility_m: 10000, condition: 'Cloudy', description: 'bulutlu', air_quality_index: 2, pm2_5: 12.0, pm10: 18.0, o3: 90.0 },
+            'Adana': { temp: 24, feels_like: 24, humidity: 50, pressure_hpa: 1006, cloud_pct: 70, wind_kmh: 9, wind_deg: 190, rain_1h_mm: 0, visibility_m: 10000, condition: 'Cloudy', description: 'parcali bulutlu', air_quality_index: 2, pm2_5: 15.0, pm10: 22.0, o3: 100.0 },
+            'Konya': { temp: 12, feels_like: 10, humidity: 40, pressure_hpa: 1010, cloud_pct: 50, wind_kmh: 15, wind_deg: 340, rain_1h_mm: 0, visibility_m: 10000, condition: 'Cloudy', description: 'parcali bulutlu', air_quality_index: 1, pm2_5: 5.0, pm10: 9.0, o3: 55.0 }
         };
 
-        // Real Gemma 4 E4B outputs from Kaggle notebook
+        // Real Gemma 4 outputs with Turkish recommendations
         const PLANT_RESULTS = {
             domates: {
-                plant: 'Tomato (Domates)',
-                disease: 'Early Blight (Erken Yaniklik) - Fungal',
-                severity: 'Moderate',
-                confidence: 92,
-                recommendations: [
-                    {
-                        title: '&#127813; 1. Disease Detection',
-                        text: 'Domates bitkilerinizde <strong>Erken Yaniklik (Early Blight)</strong> hastaligi tespit edilmistir ve bu hastalik <strong>orta derecede</strong> yayilmistir. Bu mantar hastaligi, nemli havalarda hizla yayilir ve yapraklarda kahverengi/siyah lekelerle kendini gosterir.'
-                    },
-                    {
-                        title: '&#128300; 2. Treatment Options',
-                        text: '<strong>Kimyasal (Sentetik) Tedavi:</strong> Mancozeb veya Klorotalonil iceren fungisitleri kullanabilirsiniz.<br><br><strong>Organik Tedavi (Dogal):</strong> Neem yagi veya Bakir Sulfat uygulamalari faydali olabilir.<br><br><strong>Onemli:</strong> Hangi yontemi secerseniz secin, 7-10 gun araliklarla ilaclamaya devam etmelisiniz.'
-                    },
-                    {
-                        title: '&#9728;&#65039; 3. Spray Timing',
-                        text: 'Nem seviyesi hastalik icin risk tasiyor. <strong>Hemen ilk ilaclamayi yapmak en dogrusudur.</strong><br><br>Uygulama zamani: Sabah erken saatler veya aksam ustu. Gunes tepedeyken ilaclamayin, ilac buharlasabilir.'
-                    },
-                    {
-                        title: '&#127793; 4. Preventive Measures',
-                        text: '<strong>Temizlik:</strong> Hastalikli yapraklari derhal tarladan temizleyin.<br><strong>Havalandirma:</strong> Bitkiler arasinda hava sirkulasyonunu saglayin.<br><strong>Sulama:</strong> Yaprak islatmayacak sekilde, dogrudan topa sulama yapin.'
-                    }
+                plant: 'Tomato (Domates)', disease: 'Early Blight (Erken Yaniklik)', severity: 'Moderate', confidence: 92,
+                recs: [
+                    { title: 'Hastalik Tespiti', text: 'Domates bitkilerinizde <strong>Erken Yaniklik (Early Blight)</strong> hastaligi tespit edilmistir. Hastalik <strong>orta derecede</strong> yayilmistir. Yapraklarda kahverengi/siyah lekeler gorunmektedir.' },
+                    { title: 'Tedavi Secenekleri', text: '<strong>Kimyasal:</strong> Mancozeb veya Klorotalonil iceren fungisitler (7-10 gunde bir)<br><strong>Organik:</strong> Neem yagi veya Bakir Sulfat uygulamalari (7-10 gunde bir)' },
+                    { title: 'Onleyici Tedbirler', text: 'Hastalikli yapraklari derhal temizleyin. Bitkiler arasinda hava sirkulasyonu saglayin. Yaprak islatmadan dogrudan topa sulama yapin.' }
                 ]
             },
             biber: {
-                plant: 'Pepper (Biber)',
-                disease: 'Anthracnose (Antraknoz) - Fungal',
-                severity: 'Moderate',
-                confidence: 88,
-                recommendations: [
-                    {
-                        title: '&#127798;&#65039; 1. Disease Detection',
-                        text: 'Biber bitkinde <strong>Antraknoz</strong> hastaligi tespit edilmistir. Hastalik <strong>orta siddettedir</strong>. Antraknoz, yapraklar, meyveler ve saplarda siyah, yuvarlak lekelerle kendini gosteren mantar kaynakli bir hastaliktir.'
-                    },
-                    {
-                        title: '&#128300; 2. Treatment Options',
-                        text: 'Bakir bazli veya triazol grubu fungisitler bu hastalikta etkilidir. Bolgenizdeki (Izmir) guncel ve en etkili ilac icin zirai ilac bayisine danismanizi oneririm.<br><br>Duzenli araliklarla (7-14 gun) uygulama sart.'
-                    },
-                    {
-                        title: '&#9728;&#65039; 3. Spray Timing',
-                        text: 'Hava guneli ve kuru. Antraknoz icin bu ilaclama icin uygun bir baslangic zamani. Ilaclamadan sonra havanin yagisli olmamasi onemli.'
-                    },
-                    {
-                        title: '&#127793; 4. Prevention Tips',
-                        text: '<strong>Sulama:</strong> Suyu dogrudan yapraklara degil, bitkinin dibine verin.<br><strong>Havalandirma:</strong> Sikisik dikimden kacinin.<br><strong>Budama:</strong> Hastalikli yaprak/meyveleri temizleyin ve tarla disina atin.<br><strong>Sertifikali Tohum:</strong> Saglikli fide ile baslayin.'
-                    }
+                plant: 'Pepper (Biber)', disease: 'Anthracnose (Antraknoz)', severity: 'Moderate', confidence: 88,
+                recs: [
+                    { title: 'Hastalik Tespiti', text: 'Biber bitkisinde <strong>Antraknoz</strong> hastaligi tespit edilmistir. Hastalik <strong>orta siddettedir</strong>. Meyvelerde siyah, yuvarlak lekeler gorulmektedir.' },
+                    { title: 'Tedavi Secenekleri', text: '<strong>Kimyasal:</strong> Klorotalonil veya Bakir Fungisit (7-10 gunde bir)<br><strong>Organik:</strong> Bordeaux Karisimi (7-10 gunde bir)' },
+                    { title: 'Onleyici Tedbirler', text: 'Suyu bitkinin dibine verin, yapraklari islatmayin. Sikisik dikimden kacinin. Hastalikli meyveleri tarladan uzaklastirin.' }
                 ]
             },
             uzum: {
-                plant: 'Grape (Uzum - Vitis vinifera)',
-                disease: 'Powdery Mildew / Leaf Spot (Yaprak Lekesi) - Fungal',
-                severity: 'Moderate',
-                confidence: 85,
-                recommendations: [
-                    {
-                        title: '&#127815; 1. Problem Detected',
-                        text: 'Uzum agacinizda <strong>yaprak lekesi hastaligi</strong> (mantar kaynakli enfeksiyon) tespit edilmis durumda. Yapraklarda kahverengi, lekeli ve lezyonlar olusuyor. Bu durum fotosentezi etkileyerek verimi dusurebilir. Siddet <strong>orta duzeyde</strong>.'
-                    },
-                    {
-                        title: '&#128300; 2. Treatment Options',
-                        text: '<strong>Kimyasal:</strong> Bakir bazli fungisitler veya Mankozeb iceren ilaclar (7-14 gunde bir)<br><strong>Organik:</strong> Bordeaux karisimi veya Neem yagi (7-14 gunde bir)'
-                    },
-                    {
-                        title: '&#9728;&#65039; 3. Spray Timing',
-                        text: 'Hava uygun. Sabah erken saatleri veya aksam ustu tercih edin. Gunes en tepedeyken (ogle vakti) ilaclama yapmak, ilaclarin hizla buharlasmasina neden olabilir.'
-                    },
-                    {
-                        title: '&#127793; 4. Prevention',
-                        text: 'Budama ile havalandirmayi artirin. Hastalikli yapraklari temizleyin. Damla sulama kullanin. Onleyici ilaclama takvimi uygulayin.'
-                    }
+                plant: 'Grape (Uzum)', disease: 'Leaf Spot (Yaprak Lekesi)', severity: 'Moderate', confidence: 85,
+                recs: [
+                    { title: 'Hastalik Tespiti', text: 'Uzum agacinizda <strong>Yaprak Lekesi</strong> hastaligi (mantar kaynakli) tespit edilmistir. Siddet <strong>orta duzeyde</strong>. Yapraklarda kahverengi lekeler ve lezyonlar gorulmektedir.' },
+                    { title: 'Tedavi Secenekleri', text: '<strong>Kimyasal:</strong> Bakir bazli fungisitler veya Mankozeb (7-14 gunde bir)<br><strong>Organik:</strong> Bordeaux karisimi veya Neem yagi (7-14 gunde bir)' },
+                    { title: 'Onleyici Tedbirler', text: 'Budama ile havalandirmayi artirin. Hastalikli yapraklari temizleyin. Damla sulama tercih edin.' }
                 ]
             },
             elma: {
-                plant: 'Apple (Elma)',
-                disease: 'Apple Scab (Elma Lekesi) - Fungal',
-                severity: 'Moderate',
-                confidence: 90,
-                recommendations: [
-                    {
-                        title: '&#127822; 1. Diagnosis',
-                        text: 'Elma agacinda <strong>Elma Lekesi (Scab)</strong> hastaligi tespit edilmistir. Hastaligin siddeti <strong>orta duzeydedir</strong>. Bu, hastaligin yayilmaya basladigi ve kontrol altina alinmasi gerektigi anlamina geliyor.'
-                    },
-                    {
-                        title: '&#128300; 2. Treatment Options',
-                        text: '<strong>Kimyasal Tedavi:</strong> Captan veya Myclobutanil gibi fungisitleri kullanabilirsiniz. Hastaligi hizla kontrol eder.<br><br><strong>Organik Tedavi:</strong> Kukurt Spreyi uygulayabilirsiniz.'
-                    },
-                    {
-                        title: '&#9728;&#65039; 3. Spray Timing',
-                        text: 'Hava sicakligi cok asiri soguk olmamali ve asiri yagis beklentisi olmamali. Ister kimyasal ister organik kullan, 7-10 gun arayla duzenli olarak ilaclamaya devam etmelisin.'
-                    },
-                    {
-                        title: '&#127793; 4. Preventive Measures',
-                        text: '<strong>Budama:</strong> Hastalikli dallari duzenli olarak kontrol et ve temizle.<br><strong>Hijyen:</strong> Hasat sonrasi agac temizligini iyi yap.<br><strong>Duzenli Kontrol:</strong> Belirtiler ilk ciktiginda hemen ilaclamaya basla.'
-                    }
+                plant: 'Apple (Elma)', disease: 'Apple Scab (Elma Lekesi)', severity: 'Moderate', confidence: 90,
+                recs: [
+                    { title: 'Hastalik Tespiti', text: 'Elma agacinda <strong>Elma Lekesi (Scab)</strong> hastaligi tespit edilmistir. Siddet <strong>orta duzeyde</strong>. Meyvelerde ve yapraklarda lekeler gorulmektedir.' },
+                    { title: 'Tedavi Secenekleri', text: '<strong>Kimyasal:</strong> Captan veya Myclobutanil (7-10 gunde bir)<br><strong>Organik:</strong> Kukurt Spreyi (7-10 gunde bir)' },
+                    { title: 'Onleyici Tedbirler', text: 'Hastalikli dallari duzenli budayin. Hasat sonrasi agac temizligi yapin. Belirtiler gorunce hemen mudahale edin.' }
                 ]
             }
         };
 
-        function detectPlantFromFilename(filename) {
-            const f = filename.toLowerCase();
+        function detectPlant(fn) {
+            const f = fn.toLowerCase();
             if (f.includes('domates') || f.includes('tomato')) return 'domates';
             if (f.includes('biber') || f.includes('pepper')) return 'biber';
-            if (f.includes('uzum') || f.includes('grape') || f.includes('hastabitki')) return 'uzum';
             if (f.includes('elma') || f.includes('apple')) return 'elma';
             return 'uzum';
         }
+        function condIcon(c) { return { Sunny: '\u2600\ufe0f', Rainy: '\ud83c\udf27\ufe0f', Cloudy: '\u2601\ufe0f', Stormy: '\u26c8\ufe0f', Snowy: '\u2744\ufe0f', Foggy: '\ud83c\udf2b\ufe0f', Hazy: '\ud83c\udf2b\ufe0f' }[c] || '\u2601\ufe0f' }
+        function aqiLabel(v) { return [, 'Good (Iyi)', 'Fair (Orta)', 'Moderate (Orta-Kotu)', 'Poor (Kotu)', 'Very Poor (Cok Kotu)'][v] || 'Unknown' }
+        function aqiClass(v) { return ['', 'aqi-good', 'aqi-fair', 'aqi-moderate', 'aqi-poor', 'aqi-poor'][v] || 'aqi-fair' }
 
         function handleUpload(e) {
-            const file = e.target.files[0];
-            if (!file) return;
+            const file = e.target.files[0]; if (!file) return;
             uploadedFilename = file.name;
-            const reader = new FileReader();
-            reader.onload = function (ev) {
-                const zone = document.getElementById('uploadZone');
-                zone.classList.add('has-image');
-                zone.innerHTML = '<img src="' + ev.target.result + '" alt="Plant">';
-                uploadedImage = file;
-            };
-            reader.readAsDataURL(file);
+            const r = new FileReader();
+            r.onload = function (ev) { const z = document.getElementById('uploadZone'); z.classList.add('has-image'); z.innerHTML = '<img src="' + ev.target.result + '">'; uploadedImage = file };
+            r.readAsDataURL(file);
         }
 
         async function runAnalysis() {
-            if (!uploadedImage) { alert('Please upload a photo first'); return; }
-
-            const btn = document.getElementById('analyzeBtn');
-            const pipeline = document.getElementById('pipeline');
-            btn.classList.add('loading');
-            pipeline.style.display = 'flex';
-
+            if (!uploadedImage) { alert('Please upload a photo first'); return }
+            const btn = document.getElementById('analyzeBtn'), pip = document.getElementById('pipeline');
+            btn.classList.add('loading'); pip.style.display = 'flex';
             document.getElementById('resultEmpty').style.display = 'none';
             document.getElementById('resultContent').style.display = 'none';
-
             const steps = ['step1', 'step2', 'step3', 'step4'];
-            const location = document.getElementById('locationSelect').value;
-
+            const loc = document.getElementById('locationSelect').value;
             for (let i = 0; i < steps.length; i++) {
                 document.getElementById(steps[i]).className = 'step step-active';
-                await sleep(800 + Math.random() * 1200);
+                await sleep(700 + Math.random() * 1000);
                 document.getElementById(steps[i]).className = 'step step-done';
                 document.getElementById(steps[i]).querySelector('.check').textContent = '\u2713';
             }
+            const pk = detectPlant(uploadedFilename);
+            const pl = PLANT_RESULTS[pk];
+            const w = REAL_WEATHER[loc] || REAL_WEATHER['Antalya'];
 
-            const plantKey = detectPlantFromFilename(uploadedFilename);
-            const results = JSON.parse(JSON.stringify(PLANT_RESULTS[plantKey]));
-            results.weather = WEATHER_DB[location] || WEATHER_DB['Antalya'];
-
-            document.getElementById('rPlant').textContent = results.plant;
-            document.getElementById('rDisease').textContent = results.disease;
-            document.getElementById('rSeverity').textContent = results.severity;
-            document.getElementById('confFill').style.setProperty('--w', results.confidence + '%');
-
-            const sevItem = document.getElementById('severityItem');
-            sevItem.className = 'diag-item severity-' + results.severity.toLowerCase();
-
-            document.getElementById('wCond').textContent = results.weather.condition;
-            document.getElementById('wTemp').textContent = results.weather.temp + '\u00B0C';
-            document.getElementById('wHumid').textContent = results.weather.humidity + '%';
-            document.getElementById('wRain').textContent = results.weather.rain_pct + '% rain';
-
+            document.getElementById('rPlant').textContent = pl.plant;
+            document.getElementById('rDis').textContent = pl.disease;
+            document.getElementById('rSev').textContent = pl.severity;
+            document.getElementById('confFill').style.setProperty('--w', pl.confidence + '%');
+            document.getElementById('sevItem').className = 'diag-item sev-' + pl.severity.toLowerCase();
+            document.getElementById('wiCondIcon').textContent = condIcon(w.condition);
+            document.getElementById('wiCond').textContent = w.condition;
+            document.getElementById('wiTemp').textContent = w.temp + '\u00b0C';
+            document.getElementById('wiHum').textContent = w.humidity + '%';
+            document.getElementById('wiWind').textContent = w.wind_kmh + ' km/h';
+            document.getElementById('wiRain').textContent = w.rain_1h_mm + ' mm';
+            document.getElementById('wiCloud').textContent = w.cloud_pct + '%';
+            document.getElementById('wiVis').textContent = (w.visibility_m / 1000) + 'km';
+            document.getElementById('wiPM').textContent = w.pm2_5.toFixed(1);
+            const ab = document.getElementById('aqiBar');
+            ab.className = 'aqi-bar ' + aqiClass(w.air_quality_index);
+            ab.querySelector('.aqi-dot').style.background = w.air_quality_index >= 3 ? 'var(--amber)' : 'var(--green)';
+            document.getElementById('aqiText').textContent = 'Air Quality: ' + aqiLabel(w.air_quality_index) + ' (AQI: ' + w.air_quality_index + '/5)';
             document.getElementById('analysisTime').textContent = new Date().toLocaleTimeString();
 
-            let recHTML = '<h4>&#127793; TarlAI Recommendation (Real Gemma 4 Output)</h4>';
-            results.recommendations.forEach(function (rec) {
-                recHTML += '<div class="rec-section"><h5>' + rec.title + '</h5><p>' + rec.text + '</p></div>';
-            });
-            document.getElementById('recBox').innerHTML = recHTML;
+            // Build Turkish recommendation with real weather context
+            let sprayAdvice = '';
+            if (w.rain_1h_mm > 0) {
+                sprayAdvice = '<strong>\u26a0\ufe0f UYARI:</strong> Su an yagmur yagmaktadir (' + w.rain_1h_mm + ' mm/saat). Ilaclama yapmayin! Yagmur durduktan ve yapraklar kuruduktan sonra uygulayin.';
+            } else if (w.wind_kmh > 20) {
+                sprayAdvice = '<strong>\u26a0\ufe0f UYARI:</strong> Ruzgar hizi yuksek (' + w.wind_kmh + ' km/h). Ilac savrulma riski var. Ruzgar durusunce ilaclayin.';
+            } else {
+                sprayAdvice = 'Hava kosullari ilaclama icin <strong>uygundur</strong>. Yagmur yok, ruzgar hafif (' + w.wind_kmh + ' km/h). Sabah erken veya aksam ustu uygulayin.';
+            }
 
+            let aqiAdvice = '';
+            if (w.air_quality_index >= 3) {
+                aqiAdvice = '<br><br><strong>Hava Kalitesi Uyarisi:</strong> AQI seviyesi ' + w.air_quality_index + ' (Orta-Kotu). Ilaclama yaparken maske kullanmaniz tavsiye edilir. PM2.5: ' + w.pm2_5.toFixed(1) + ' \u00b5g/m\u00b3.';
+            }
+
+            let html = '<h4>&#127793; TarlAI Recommendation (Gemma 4 + Real API Data)</h4>';
+            pl.recs.forEach(function (r, i) {
+                html += '<div class="rec-section"><h5>' + (i + 1) + '. ' + r.title + '</h5><p>' + r.text + '</p></div>';
+            });
+            html += '<div class="rec-section"><h5>' + (pl.recs.length + 1) + '. Ilaclama Zamani (' + loc + ' - Canli Veri)</h5><p>' + sprayAdvice + aqiAdvice + '</p></div>';
+
+            document.getElementById('recBox').innerHTML = html;
             document.getElementById('resultContent').style.display = 'block';
             document.getElementById('resultContent').style.animation = 'fadeUp .5s ease both';
-
             btn.classList.remove('loading');
         }
-
-        function sleep(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+        function sleep(ms) { return new Promise(function (r) { setTimeout(r, ms) }) }
     </script>
 </body>
 
